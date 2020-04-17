@@ -5,7 +5,7 @@ input[type="number"] {
 
 div.outer {
   position: fixed;
-  top: 41px;
+  top: 51px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -58,4 +58,11 @@ h1, h2, h3, h4 { font-weight: 200; }
 /* If not using map tiles, show a white background */
 .leaflet-container {
   background-color: white !important;
+}
+
+/* mode bar style */
+modeBarStyle: {
+  orientation: 'h';
+  backgroundColor: 'rgba(255 ,255 ,255 ,0.7)';
+  iconColor: 'rgba(0, 31, 95, 0.3);';
 }

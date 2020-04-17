@@ -1,7 +1,7 @@
 library(shiny)
 library(leaflet)
 library(RColorBrewer)
-
+library(plotly)
 
 list.assessments <- c("Overall (1993-2018)"="overall",
                       "-Winter"="winter","-Spring"="spring",
@@ -19,7 +19,8 @@ list.metrics <- c("QObs-Mean" = "miu_obs",
 basin_layer.info <- read.table("AppDATA/info_stations.txt", sep=",", header=TRUE,
                                colClasses = c("siteID"="character"))
 
-list.basin_characters <- c("lat","lon","DA","Precip_mmperyear","PET_mmperyear","AI")
+list.basin_characters <- c("lat","lon","DA","Precip_mmperyear","PET_mmperyear","AI",
+                           "dams","NID_str","Mx_strg","Nrml_st")
 
 list.hucs <- 1:18
 names(list.hucs) <- paste0("huc",sprintf("%02d",1:18))
@@ -65,7 +66,8 @@ tabPanel("Regional Analyses",
                          checkboxInput("RA_yvar_log", h5("y in log space"), value = FALSE)
             ),
             mainPanel(
-               plotOutput("RA_plot")
+               br(),
+               plotlyOutput("RA_plot", height="600px")
             )
          )
 ),
@@ -73,7 +75,17 @@ tabPanel("Regional Analyses",
 
 ################# DOCUMENTATION TAB #################
    tabPanel("Documentation",
-            h5("User guide / methodology")
+            tags$div(
+               tags$h4("User guide / methodology"),
+               tags$br(),
+               tags$img(src="Assessment.png", width=1000),
+               tags$br(),
+               tags$img(src="MSE.png", width=1000),
+               tags$br(),
+               tags$img(src="NSE.png", width=1000),
+               tags$br(),
+               tags$img(src="KGE.png", width=1000)
+            )
    ),
    
    conditionalPanel("false", icon("crosshair"))
